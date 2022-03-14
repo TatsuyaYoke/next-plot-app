@@ -1,28 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import Plot from 'react-plotly.js'
 import axios from 'axios'
-
-const products = [
-    "apple",
-    "banana",
-    "orange",
-    "cheese cake",
-    "banana cake",
-    "apple juice",
-    "orange juice"
-]
+import Graphs from '../components/graphs'
+import { Button } from '@chakra-ui/react'
 
 const GroundTest = () => {
     const [date, setDate] = useState([])
-    const [otherTlm, setOtherTlm] = useState({})
+    const [tlms, setTlms] = useState({})
     const [tlmNames, setTlmNames] = useState([])
-    const plotlyColors = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52'] 
     
     const [keyword, setKeyword] = useState("")
-    const [showLists, setShowLists] = useState(false)
-    const [filteredProducts, setFilteredProducts] = useState(products)
+    const [filteredTlmNames, setFilteredTlmNames] = useState([])
 
     const fetchTlmNames = async () => {
         const response = await axios.get('http://localhost:3000/api/fetch-tlm')
@@ -30,31 +19,24 @@ const GroundTest = () => {
         setTlmNames(() => tlmNames)
     }
     
-    const filterProducts = () => {
+    const filterTlmNames = () => {
         if (keyword === "") {
-            setFilteredProducts(products)
+            setFilteredTlmNames(tlmNames)
             return
         }
       
-        const searchKeywords = keyword
-            .trim()
-            .toLowerCase()
-            .match(/[^\s]+/g);
-
-        if (searchKeywords === null) {
-            setFilteredProducts(products)
-            return
-        }
-        const result = products.filter((product) =>
-            searchKeywords.every((kw) => product.toLowerCase().indexOf(kw) !== -1)
-        )
-      
-        setFilteredProducts(result.length ? result : ["No Item Found"])
+        const filteredTlmNames = tlmNames.filter((tlmName) => {
+           return tlmName.toLowerCase().search(keyword.toLowerCase()) !== -1 
+        })
+        setFilteredTlmNames(filteredTlmNames.length ? filteredTlmNames: ['Not found'])
     }
 
     useEffect(() => {
-        // fetchTlmNames()
-        filterProducts()
+        fetchTlmNames()
+    }, [])
+
+    useEffect(() => {
+        filterTlmNames()
     }, [keyword])
     
     const plotTelemetry = async () => {
@@ -62,7 +44,7 @@ const GroundTest = () => {
         const response = await axios.get('http://localhost:3000/api/fetch-tlm')
         const { DATE, ...otherData } = response.data
         setDate(() => response.data['DATE'])
-        setOtherTlm(() => otherData)
+        setTlms(() => otherData)
     }
     return (
         <>
@@ -77,49 +59,20 @@ const GroundTest = () => {
             </h2>
             <input 
                 onChange={e => setKeyword(e.target.value)}
-                onClick={() => setShowLists(true)}
             />
             { 
-                showLists && filteredProducts.map((v, i) => {
-                    return (
-                        <p key={ i }>{ v }</p>
-                    )
-                })
-            }
-            {
-                tlmNames.map((tlmName, index) => {
+                filteredTlmNames.map((tlmName, index) => {
                     return (
                         <p key={ index }>{ tlmName }</p>
-                    )
-                })
-            }
-            <button onClick={plotTelemetry}>Plot</button>
-            <div>
-                {
-                    Object.keys(otherTlm).map((key, index) => {
-                        const colorLength = plotlyColors.length
-                        const color = plotlyColors[index % colorLength]
-                        return (
-                            <Plot
-                                key={ index }
-                                data={[
-                                    {
-                                        x: date,
-                                        y: otherTlm[key],
-                                        type: 'scattergl',
-                                        mode: 'lines+markers',
-                                        marker: { color: color }
-                                    }
-                                ]}
-                                layout={{
-                                    width: 500,
-                                    height: 500,
-                                    title: key 
-                                }}
-                            />
                         )
                     })
                 }
+            <Button onClick={ plotTelemetry } colorScheme="blue">Plot</Button>
+            <div>
+                <Graphs
+                    date={ date } 
+                    tlms={ tlms }
+                />
             </div>
         </>
     )
