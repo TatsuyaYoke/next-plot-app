@@ -16,7 +16,12 @@ const Graph = (props) => {
         layout={{
             width: 500,
             height: 500,
-            title: props.title
+            // title: props.title
+            xaxis: {
+                tickformat: '%m-%d, %H:%M',
+                tickangle: -45,
+                dtick: 3 * 60 * 60 * 1000 // milliseconds
+            }
         }}
       /> 
    ) 
