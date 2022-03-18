@@ -47,8 +47,8 @@ const TelemetrySelect = () => {
                     color='teal.500'
                     width='100%'
                     height='40px'
-                    options={tlmNamesOptions}
-                    isMulti={false}
+                    options={ tlmNamesOptions }
+                    isMulti={ isMulti }
                 />
                 <IconButton
                     variant='outline'
