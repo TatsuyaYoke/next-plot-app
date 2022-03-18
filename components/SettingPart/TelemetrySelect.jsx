@@ -2,9 +2,15 @@ import { VStack, Text, Flex, IconButton, Box } from "@chakra-ui/react"
 import { SmallCloseIcon, AddIcon } from "@chakra-ui/icons"
 import OriginalSelect from "../OriginalSelect"
 import OriginalSwitch from "../OriginalSwitch"
+import { useState } from "react"
 
 const TelemetrySelect = () => {
-    
+
+    const [isMulti, setIsMulti] = useState(false)
+    const toggle = () => {
+        setIsMulti((value) => !value)
+    }
+
     const tlmNames = [
         'DATE',
         'PCDU_BAT_VOLTAGE',
@@ -27,9 +33,14 @@ const TelemetrySelect = () => {
             <Flex w='100%'>
                 <Text fontWeight={600}>Choose telemeries</Text> 
             </Flex>
-            <OriginalSwitch id='is-multi'>
+            <OriginalSwitch
+                id='is-multi'
+                value={ isMulti }
+                setValue={ toggle }
+            >
                 isMulti? 
             </OriginalSwitch>
+            <p>{isMulti ? 'true' : 'false'}</p>
             <Flex w='100%' alignItems='center'>
                 <OriginalSelect
                     id='tlm'

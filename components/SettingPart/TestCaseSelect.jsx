@@ -1,8 +1,13 @@
-import { Checkbox, VStack, Flex, Text } from "@chakra-ui/react"
-import { Select } from "chakra-react-select"
+import { VStack } from "@chakra-ui/react"
 import OriginalSelect from "../OriginalSelect"
+import OriginalSwitch from "../OriginalSwitch"
+import { useState } from "react"
 
 const TestCaseSelect = () => {
+    const [isChoosed, setIsChoosed] = useState(false)
+    const toggle = () => {
+        setIsChoosed((value) => !value)
+    }
 
     const testCases = [
         'Flatsat',
@@ -22,10 +27,14 @@ const TestCaseSelect = () => {
 
     return (
         <VStack>
-            <Flex w='100%'> 
-                <Checkbox size='lg' colorScheme='teal' mr={2}></Checkbox>
-                <Text fontWeight={600}>Choose test cases</Text>
-            </Flex>
+            <OriginalSwitch
+                id='choose-test-cases' 
+                value={ isChoosed }
+                setValue={ toggle }
+            >
+                Choose test cases
+            </OriginalSwitch>
+            <p>{isChoosed ? 'true' : 'false'}</p>
             <OriginalSelect
                 id='test'
                 color='teal.500'
