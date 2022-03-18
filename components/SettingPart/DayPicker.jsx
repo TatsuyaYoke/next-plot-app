@@ -1,10 +1,16 @@
 import { VStack, Box, Text } from "@chakra-ui/react"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SingleDatepicker } from "chakra-dayzed-datepicker"
 
 const DayPicker = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+    
+    useEffect(() => {
+        if (startDate > endDate) {
+            setEndDate(() => startDate)
+        }
+    }, [startDate, endDate])
 
     return (
         <VStack spacing={3}>
