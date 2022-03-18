@@ -1,14 +1,12 @@
 import { Select } from "chakra-react-select"
-import { useState } from "react"
 
-const OriginalSelect = ({ id, color, width, height, options, isMulti }) => {
+const OriginalSelect = ({ id, color, width, height, options, isMulti, setValue }) => {
 
-    const [optionList, setOptionList] = useState([])    
     const onChange = (selectedOption) => {
         if (Array.isArray(selectedOption)) {
-            setOptionList(selectedOption)
+            setValue(selectedOption)
         } else {
-            setOptionList([selectedOption])
+            setValue([selectedOption])
         }
     }
     
@@ -38,13 +36,6 @@ const OriginalSelect = ({ id, color, width, height, options, isMulti }) => {
                     })
                 }}
             />
-            {
-                optionList.map((element, index) => {
-                        return (
-                            <p key={ index }>{ element.value }</p>
-                        )
-                })
-            }
         </>
     ) 
 }

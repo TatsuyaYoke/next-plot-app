@@ -4,10 +4,9 @@ import OriginalSwitch from "../OriginalSwitch"
 import { useState } from "react"
 
 const TestCaseSelect = () => {
+
     const [isChoosed, setIsChoosed] = useState(false)
-    const toggle = () => {
-        setIsChoosed((value) => !value)
-    }
+    const [testCaseList, setTestCaseList] = useState([])
 
     const testCases = [
         'Flatsat',
@@ -30,7 +29,7 @@ const TestCaseSelect = () => {
             <OriginalSwitch
                 id='choose-test-cases' 
                 value={ isChoosed }
-                setValue={ toggle }
+                setValue={ setIsChoosed }
             >
                 Choose test cases
             </OriginalSwitch>
@@ -40,9 +39,18 @@ const TestCaseSelect = () => {
                 color='teal.500'
                 width='100%'
                 height='40px'
-                options={testCaseOptions}
-                isMulti={true}
+                options={ testCaseOptions }
+                isMulti={ true }
+                value={ testCaseList }
+                setValue={ setTestCaseList }
             />
+            {
+                testCaseList.map((element, index) => {
+                        return (
+                            <p key={ index }>{ element.value }</p>
+                        )
+                })
+            }
         </VStack>
     ) 
 }

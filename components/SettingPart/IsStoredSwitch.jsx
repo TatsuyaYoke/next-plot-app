@@ -2,17 +2,15 @@ import OriginalSwitch from "../OriginalSwitch"
 import { useState } from "react"
 
 const IsStoredSwitch = () => {
+    
     const [isStored, setIsStored] = useState(false)
-    const toggle = () => {
-        setIsStored((value) => !value)
-    }
     
     return (
         <>
             <OriginalSwitch
                 id='is-stored'
                 value={ isStored }
-                setValue= { toggle }
+                setValue= { setIsStored }
             >
                 isStored?
             </OriginalSwitch>

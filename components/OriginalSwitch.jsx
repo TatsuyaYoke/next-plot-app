@@ -1,16 +1,17 @@
 import { FormControl, FormLabel, Switch } from "@chakra-ui/react";
 
 const OriginalSwitch = ({ children, id, value, setValue }) => {
+
     return (
         <FormControl display='flex' alignItems='center'>
             <FormLabel htmlFor={ id } mb='0'>
                 { children }
             </FormLabel>
             <Switch
-                jid={ id }
+                id={ id }
                 colorScheme='teal'
-                value={ value } 
-                onChange={ setValue }
+                defaultChecked={ value }
+                onChange={()=> setValue(() => !value)}
             />
         </FormControl>
     )

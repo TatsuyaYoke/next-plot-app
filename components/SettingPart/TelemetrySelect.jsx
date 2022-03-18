@@ -6,10 +6,8 @@ import { useState } from "react"
 
 const TelemetrySelect = () => {
 
-    const [isMulti, setIsMulti] = useState(false)
-    const toggle = () => {
-        setIsMulti((value) => !value)
-    }
+    const [isMulti, setIsMulti] = useState(true)
+    const [tlmList, setTlmList] = useState([])
 
     const tlmNames = [
         'DATE',
@@ -36,7 +34,7 @@ const TelemetrySelect = () => {
             <OriginalSwitch
                 id='is-multi'
                 value={ isMulti }
-                setValue={ toggle }
+                setValue={ setIsMulti }
             >
                 isMulti? 
             </OriginalSwitch>
@@ -49,7 +47,15 @@ const TelemetrySelect = () => {
                     height='40px'
                     options={ tlmNamesOptions }
                     isMulti={ isMulti }
+                    setValue={ setTlmList }
                 />
+                {
+                    tlmList.map((element, index) => {
+                            return (
+                                <p key={ index }>{ element.value }</p>
+                            )
+                    })
+                }
                 <IconButton
                     variant='outline'
                     colorScheme='teal'
