@@ -1,5 +1,5 @@
 // import Head from 'next/head'
-// import Link from 'next/link'
+import Link from 'next/link'
 // import styles from '../styles/Home.module.css'
 
 // export default function Home() {
@@ -30,6 +30,9 @@ export default function Home() {
       <ChakraProvider>
         <Container maxW='container.xl' p={5}>
           <PlotSetting/>
+            <Link href="/plot/ground-test">
+              <a>Plot</a> 
+            </Link>
         </Container>  
       </ChakraProvider>
     </>

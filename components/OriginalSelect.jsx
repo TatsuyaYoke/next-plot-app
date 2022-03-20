@@ -15,6 +15,8 @@ const OriginalSelect = ({ id, color, width, height, options, isMulti, setValue }
             <Select
                 instanceId={ id }
                 size='sm'
+                width={ width }
+                height={ height }
                 isMulti={ isMulti }
                 options={ options }
                 placeholder=''

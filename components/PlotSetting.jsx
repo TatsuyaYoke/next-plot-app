@@ -17,7 +17,7 @@ const PlotSetting = () => {
             <PlotButton/>
             <IsStoredSwitch/>
             <DayPicker/>
-            <TestCaseSelect/>
+            {/* <TestCaseSelect/> */}
             <TelemetrySelect/>
         </VStack>
     )

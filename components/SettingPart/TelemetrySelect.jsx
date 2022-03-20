@@ -2,12 +2,13 @@ import { VStack, Text, Flex, IconButton, Box } from "@chakra-ui/react"
 import { SmallCloseIcon, AddIcon } from "@chakra-ui/icons"
 import OriginalSelect from "../OriginalSelect"
 import OriginalSwitch from "../OriginalSwitch"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const TelemetrySelect = () => {
-
-    const [isMulti, setIsMulti] = useState(true)
-    const [tlmList, setTlmList] = useState([])
+    console.log('rendring...')
+    const [isMulti, setIsMulti] = useState(false)
+    const [tlmList, setTlmList] = useState([[]])
+    const [tlm, setTlm] = useState([])
 
     const tlmNames = [
         'DATE',
@@ -22,9 +23,21 @@ const TelemetrySelect = () => {
         }
     })
     
-    const add = () => {
-        console.log('add')
+    const addTlmList = () => {
+        const newTlmList = [...tlmList]
+        newTlmList.push([])
+        setTlmList(newTlmList)
     }
+    
+    const deleteTlmList = (index) => {
+        const newTlmList = [...tlmList]
+        newTlmList.splice(index, 1)
+        setTlmList(newTlmList)
+    }
+
+    useEffect(() => {
+        console.log(tlm)
+    }, [tlm])
 
     return (
         <VStack>
@@ -39,40 +52,44 @@ const TelemetrySelect = () => {
                 isMulti? 
             </OriginalSwitch>
             <p>{isMulti ? 'true' : 'false'}</p>
-            <Flex w='100%' alignItems='center'>
-                <OriginalSelect
-                    id='tlm'
-                    color='teal.500'
-                    width='100%'
-                    height='40px'
-                    options={ tlmNamesOptions }
-                    isMulti={ isMulti }
-                    setValue={ setTlmList }
-                />
+            <VStack w={'100%'}> 
                 {
-                    tlmList.map((element, index) => {
-                            return (
-                                <p key={ index }>{ element.value }</p>
-                            )
-                    })
+                    tlmList.map((element, index) => (
+                        <Flex
+                            key={`tlm${index}`}
+                            w='100%'
+                            alignItems='center'
+                        >
+                            <OriginalSelect
+                                id={`tlm${index}`}
+                                color='teal.500'
+                                width='100%'
+                                height='40px'
+                                options={ tlmNamesOptions }
+                                isMulti={ isMulti }
+                                setValue={ setTlm }
+                            />
+                            <IconButton
+                                variant='outline'
+                                colorScheme='teal'
+                                fontSize='15px'
+                                size='xs'
+                                icon={<SmallCloseIcon />}
+                                mx={2}
+                                onClick={ () => deleteTlmList(index) }
+                            />
+                        </Flex>
+                    ))
                 }
-                <IconButton
-                    variant='outline'
-                    colorScheme='teal'
-                    fontSize='15px'
-                    size='xs'
-                    icon={<SmallCloseIcon />}
-                    mx={2}
-                />
-            </Flex>
+            </VStack>
             <Flex w='100%' justifyContent='right'> 
                 <IconButton
                     colorScheme='teal'
                     size='xs'
-                    onClick={add}
                     icon={<AddIcon/>}
                     mt={2}
                     mr={2}
+                    onClick={() => addTlmList() }
                 />
             </Flex>
         </VStack>
