@@ -14,27 +14,31 @@ import Link from 'next/link'
 //       <main className={styles.main}>
 //         <h1 className={styles.title}>
 //           <Link href="/plot/ground-test">
-//             <a>Plot</a> 
+//             <a>Plot</a>
 //           </Link>
 //         </h1>
 //       </main>
 //     </div>
 //   )
-// }  
+// }
 
-import { ChakraProvider, Container } from "@chakra-ui/react"
-import PlotSetting from "../components/PlotSetting"
+import { ChakraProvider, Container } from '@chakra-ui/react'
+import { PlotSettingProvider } from '../components/providers/PlotSettingProvider'
+import PlotSetting from '../components/PlotSetting'
+
 export default function Home() {
   return (
     <>
-      <ChakraProvider>
-        <Container maxW='container.xl' p={5}>
-          <PlotSetting/>
+      <PlotSettingProvider>
+        <ChakraProvider>
+          <Container maxW="container.xl" p={5}>
+            <PlotSetting />
             <Link href="/plot/ground-test">
-              <a>Plot</a> 
+              <a>Plot</a>
             </Link>
-        </Container>  
-      </ChakraProvider>
+          </Container>
+        </ChakraProvider>
+      </PlotSettingProvider>
     </>
   )
 }
