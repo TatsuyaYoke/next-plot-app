@@ -45,12 +45,12 @@ const GroundTest = () => {
   const plotTelemetry = async () => {
     console.log('Plot')
     const response = await axios.get('http://localhost:3000/api/fetch-tlm')
-    const { _DATE, ...otherData } = response.data
+    const { DATE, ...otherData } = response.data
     setDate(() => response.data['DATE'])
     setTlms(() => otherData)
   }
   return (
-    <ChakraProvider resetCSS={false}>
+    <ChakraProvider resetCSS={true}>
       <Head>
         <title>Ground Test Viewer</title>
       </Head>
@@ -61,9 +61,9 @@ const GroundTest = () => {
         </Link>
       </h2>
       <input onChange={(e) => setKeyword(e.target.value)} />
-      {filteredTlmNames.map((tlmName, index) => {
-        return <p key={index}>{tlmName}</p>
-      })}
+      {filteredTlmNames.map((tlmName, index) => (
+        <p key={index}>{tlmName}</p>
+      ))}
       <Button onClick={plotTelemetry} colorScheme="blue">
         Plot
       </Button>
