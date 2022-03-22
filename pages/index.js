@@ -32,10 +32,10 @@ export default function Home() {
       <PlotSettingProvider>
         <ChakraProvider>
           <Container maxW="container.xl" p={5}>
-            <PlotSetting />
             <Link href="/plot/ground-test">
               <a>Plot</a>
             </Link>
+            <PlotSetting />
           </Container>
         </ChakraProvider>
       </PlotSettingProvider>
