@@ -45,12 +45,12 @@ const GroundTest = () => {
   const plotTelemetry = async () => {
     console.log('Plot')
     const response = await axios.get('http://localhost:3000/api/fetch-tlm')
-    const { DATE, ...otherData } = response.data
+    const { _DATE, ...otherData } = response.data
     setDate(() => response.data['DATE'])
     setTlms(() => otherData)
   }
   return (
-    <ChakraProvider resetCSS={true}>
+    <ChakraProvider resetCSS={false}>
       <Head>
         <title>Ground Test Viewer</title>
       </Head>
