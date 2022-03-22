@@ -9,26 +9,26 @@ const OriginalSelect = ({
   isMulti,
   value,
   setValue,
-  index,
-  defaultValue,
 }) => {
-  console.log(defaultValue)
   const onChange = (selectedOption) => {
-    const newValue = [...value]
     const addValue = []
     if (Array.isArray(selectedOption)) {
       addValue.push(selectedOption)
     } else {
       addValue.push([selectedOption])
     }
-    newValue[index] = addValue
-    setValue(newValue)
+    const findIndex = value.findIndex((element) => {
+      return element.id === id
+    })
+
+    value[findIndex].tlm = addValue
+    setValue(value)
   }
 
   return (
     <>
       <Select
-        instanceId={id}
+        instanceId={`tlm${id}`}
         size="sm"
         width={width}
         height={height}
@@ -36,10 +36,6 @@ const OriginalSelect = ({
         options={options}
         placeholder=""
         focusBorderColor={color}
-        defaultValue={[
-          { label: 'DATE', value: 'DATE' },
-          { label: 'VOLTAGE', value: 'VOLTAGE' },
-        ]}
         onChange={onChange}
         chakraStyles={{
           valueContainer: (provided) => ({
