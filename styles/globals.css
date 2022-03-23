@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -13,4 +13,10 @@ a {
 
 * {
   box-sizing: border-box;
+} */
+
+/* 👇👇👇 reset css のうち こいつが悪さしていたみたいです。 👇👇👇 */
+/* また、chakra ui の reset css は https://github.com/chakra-ui/chakra-ui/blob/main/packages/css-reset/src/css-reset.tsx ここから確認できます！ */
+svg {
+  display: unset !important;
 }

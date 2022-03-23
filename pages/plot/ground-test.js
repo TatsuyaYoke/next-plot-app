@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Graphs from '../components/graphs'
+import Graphs from '../../components/graphs'
 import { Button } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/provider'
 
@@ -50,7 +50,7 @@ const GroundTest = () => {
     setTlms(() => otherData)
   }
   return (
-    <ChakraProvider resetCSS={false}>
+    <>
       <Head>
         <title>Ground Test Viewer</title>
       </Head>
@@ -70,7 +70,7 @@ const GroundTest = () => {
       <div>
         <Graphs date={date} tlms={tlms} />
       </div>
-    </ChakraProvider>
+    </>
   )
 }
 
