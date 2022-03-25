@@ -1,4 +1,5 @@
-import Plot from 'react-plotly.js'
+import dynamic from 'next/dynamic'
+const Plot = dynamic(() => import('react-plotly.js'), { ssr: false })
 
 const Graph = ({ x, y, color, _title }) => {
   return (
