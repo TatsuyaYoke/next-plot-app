@@ -15,7 +15,12 @@ const Graph = ({ x, y, color, _title }) => {
       layout={{
         width: 500,
         height: 500,
-        // title: title
+        margin: {
+          l: 50,
+          r: 50,
+          t: 20,
+          b: 80,
+        },
         xaxis: {
           tickformat: '%m-%d, %H:%M',
           tickangle: -45,
