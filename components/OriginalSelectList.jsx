@@ -1,17 +1,28 @@
-
 import { Select } from 'chakra-react-select'
 
-const OriginalSelect = ({
+const OriginalSelectList = ({
   id,
   color,
   width,
   height,
   options,
   isMulti,
+  value,
   setValue,
 }) => {
   const onChange = (selectedOption) => {
-    setValue(selectedOption)
+    const addValue = []
+    if (Array.isArray(selectedOption)) {
+      addValue.push(selectedOption)
+    } else {
+      addValue.push([selectedOption])
+    }
+    const findIndex = value.findIndex((element) => {
+      return element.id === id
+    })
+
+    value[findIndex].tlm = addValue
+    setValue(value)
   }
 
   return (
@@ -46,4 +57,4 @@ const OriginalSelect = ({
   )
 }
 
-export default OriginalSelect
+export default OriginalSelectList

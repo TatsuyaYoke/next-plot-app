@@ -1,6 +1,6 @@
 import { VStack, Text, Flex, IconButton } from '@chakra-ui/react'
 import { SmallCloseIcon, AddIcon } from '@chakra-ui/icons'
-import OriginalSelect from '../OriginalSelect'
+import OriginalSelectList from '../OriginalSelectList'
 import OriginalSwitch from '../OriginalSwitch'
 import { useState } from 'react'
 
@@ -44,7 +44,7 @@ const TelemetrySelect = () => {
       <VStack w={'100%'}>
         {tlmList.map((element, index) => (
           <Flex key={`tlm${element.id}`} w="100%" alignItems="center">
-            <OriginalSelect
+            <OriginalSelectList
               id={element.id}
               color="teal.500"
               width="100%"
