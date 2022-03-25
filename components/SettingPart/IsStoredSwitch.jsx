@@ -1,10 +1,9 @@
 import OriginalSwitch from '../OriginalSwitch'
-import { useState, useContext } from 'react'
-import { PlotSettingContext } from '../providers/PlotSettingProvider'
+import { useRecoilState } from 'recoil'
+import { isStoredState } from '../atoms/PlotSettingAtom'
 
 const IsStoredSwitch = () => {
-  // const [isStored, setIsStored] = useState(false)
-  const { isStored, setIsStored } = useContext(PlotSettingContext)
+  const [isStored, setIsStored] = useRecoilState(isStoredState)
 
   return (
     <>

@@ -4,12 +4,11 @@ import IsStoredSwitch from './SettingPart/IsStoredSwitch'
 import DayPicker from './SettingPart/DayPicker'
 import TestCaseSelect from './SettingPart/TestCaseSelect'
 import TelemetrySelect from './SettingPart/TelemetrySelect'
-
-import { useContext } from 'react'
-import { PlotSettingContext } from './providers/PlotSettingProvider'
+import { useRecoilValue } from 'recoil'
+import { isStoredState } from './atoms/PlotSettingAtom'
 
 const PlotSetting = () => {
-  const { isStored } = useContext(PlotSettingContext)
+  const isStored = useRecoilValue(isStoredState)
   console.log(isStored)
 
   return (

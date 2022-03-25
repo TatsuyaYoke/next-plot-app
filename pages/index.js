@@ -21,24 +21,21 @@ import Link from 'next/link'
 //     </div>
 //   )
 // }
-
-import { ChakraProvider, Container } from '@chakra-ui/react'
-import { PlotSettingProvider } from '../components/providers/PlotSettingProvider'
+import { Container } from '@chakra-ui/react'
 import PlotSetting from '../components/PlotSetting'
+import { RecoilRoot } from 'recoil'
 
 export default function Home() {
   return (
     <>
-      <PlotSettingProvider>
-        <ChakraProvider>
-          <Container maxW="container.xl" p={5}>
-            <Link href="/plot/ground-test">
-              <a>Plot</a>
-            </Link>
-            <PlotSetting />
-          </Container>
-        </ChakraProvider>
-      </PlotSettingProvider>
+      <RecoilRoot>
+        <Container maxW="container.xl" p={5}>
+          <Link href="/plot/ground-test">
+            <a>Plot</a>
+          </Link>
+          <PlotSetting />
+        </Container>
+      </RecoilRoot>
     </>
   )
 }
